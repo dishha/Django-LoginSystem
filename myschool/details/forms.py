@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+from .models import(Teacher,Student)
 
 
 class TeacherForm(forms.ModelForm):
@@ -7,7 +8,7 @@ class TeacherForm(forms.ModelForm):
 	LastName=forms.CharField(widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Last name'}))
 	Email=forms.EmailField(widget=forms.EmailInput(attrs={'type':'text','placeholder':'Email'}))
 	Username=forms.CharField(widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Username'}))
-	branch=forms.CharField(widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Username'}))
+	branch=forms.CharField(widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Branch'}))
 
 	class Meta:
 		model=Teacher
@@ -18,7 +19,7 @@ class StudentForm(forms.ModelForm):
 	LastName=forms.CharField(widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Last name'}))
 	Email=forms.EmailField(required=True,widget=forms.EmailInput(attrs={'type':'text','placeholder':'Email'}))
 	Username=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Username'}))
-	branch=forms.CharField(widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Username'}))
+	branch=forms.CharField(widget=forms.TextInput(attrs={'class':'form-inline','type':'text','placeholder':'Branch'}))
 	RollNumber=forms.IntegerField()
 
 	class Meta:
