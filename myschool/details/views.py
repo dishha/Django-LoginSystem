@@ -3,42 +3,17 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from .forms import (StudentForm, TeacherForm)
 from .models import (Teacher, Student , cl)
+from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
 
-
 def Teacher_registration(request):
-	form =TeacherForm(request.POST or None,request.FILES or None)
-	print "after form variable"
-	
-	branch1 = form['branch'].value() #foreignkey
-	print branch1
-
-	branch2 = cl.objects.get(branch=branch1) 
-	print branch2
-	branch_id=branch2.pk
-	print branch_id	
-	form.update(branch = 'branch_id')
-	
-
-
-	
+	form =TeacherForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
-			print "inside if block"
-			
-			
-		
-
-			
-
 			form.save()
-
 			instance = form.save(commit=False)
 			instance.save()
-			messages.success(request, "Successfully Registered")
-			return HttpResponseRedirect(instance.get_absolute_url())
-	
-	
+			return HttpResponse("success")
 	context ={
 		"form": TeacherForm,
 	}
