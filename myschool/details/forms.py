@@ -3,9 +3,13 @@ from django.db import models
 from .models import(Teacher,Student,Class)
 
 
+from .models import(Teacher,Student,Class)
+
+
 class TeacherForm(forms.ModelForm):
 	class Meta:
 		model=Teacher
+		fields=('name_T','emails_T','branch')
 		fields=('name_T','emails_T','branch')
 
 class StudentForm(forms.ModelForm):

@@ -5,9 +5,11 @@ from .forms import (StudentForm, TeacherForm)
 from .models import (Teacher, Student , Class)
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
-
+from .models import (Teacher, Student , Class)
+from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
+
 
 def Teacher_registration(request):
 	form =TeacherForm(request.POST or None, request.FILES or None)
