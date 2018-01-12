@@ -40,7 +40,18 @@ class Student(models.Model):
 	class Meta:
 		ordering =["-timestamp","-updated"]
 
+class Homework(models.Model):
+	topic = models.CharField(max_length=50)
+	questions=models.TextField()
+	due_date=models.DateTimeField()
+	updated= models.DateTimeField(auto_now=True,auto_now_add=False)
+	timestamp= models.DateTimeField(auto_now=False,auto_now_add=True)
 
+	def __str__(self):
+		return self.topic
+
+	class Meta:
+		ordering =["-timestamp","-updated"]
 
 
 

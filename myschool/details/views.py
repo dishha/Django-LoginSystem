@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render
-from .forms import (StudentForm, TeacherForm)
-from .models import (Teacher, Student , Class)
+from .forms import (StudentForm, TeacherForm,HomeworkForm)
+from .models import (Teacher, Student,Class,Homework)
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
-from .models import (Teacher, Student , Class)
-from django.http import HttpResponseRedirect, HttpResponse
+
 
 # Create your views here.
 
@@ -23,6 +22,8 @@ def Teacher_registration(request):
 	}
 	return render(request,"teacher_form.html",context)
 
+
+
 def Student_registration(request):
 	form =StudentForm(request.POST or None,request.FILES or None)
 	if form.is_valid():
@@ -37,7 +38,7 @@ def Student_registration(request):
 	return render(request,"student_form.html",context)
 
 
-
+#Student CRUD
 def student_details(request,id=None):
 	instance=get_object_or_404(Student,id=id)
 	context ={
@@ -76,6 +77,7 @@ def student_delete(request,id=None):
 	instance.delete()
 	return HttpResponse("Succesfully Deleted")
 
+ #Teacher CRUD
 def teacher_details(request,id=None):
 	instance=get_object_or_404(Teacher,id=id)
 	context ={
@@ -103,13 +105,26 @@ def teacher_update(request,id=None):
 		return HttpResponse("Succesfully Updated")
 	
 	context ={
-	"name_S":instance.name_T,
+	"name_T":instance.name_T,
 	"instance": instance,
 	"form": form,
 	}
 	return render(request,"teacher_form.html",context)
 
-def teacher_delete(request,id=None):
+def teacher_delete(request,id=None):                                         
 	instance = get_object_or_404(Teacher, id=id)
 	instance.delete()
 	return HttpResponse("Succesfully Deleted")
+
+#Adding Homework to Teacher Details
+def addHomework(request):
+	form =HomeworkForm(request.POST or None ,request.FILES or None)
+	if form.is_valid():
+		instance = form.save(commit = False)
+		instance.save()
+		return HttpResponse("Succesfully Added Homework")
+	
+	context ={
+	"form": HomeworkForm,
+	}
+	return render(request,"addHomework.html",context)
